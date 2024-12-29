@@ -181,7 +181,8 @@ button:hover {
   overflow-wrap: break-word;
   white-space: normal;
   max-width: calc(100% - 50px);
-  text-transform: uppercase;
+  font-weight: bold;
+
 }
 .note-checkbox {
   appearance: none;
