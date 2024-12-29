@@ -1,12 +1,12 @@
 import React from 'react';
 import NoteItem from './NoteItem.jsx';
 
-const NoteList = ({ notes, search, handleDeleteNote, handleEditNote, handleToggleComplete, completedNotes, filter, darkMode }) => {
-  const filteredNotes = notes.filter((note, index) => {
+const NoteList = ({ notes, search, handleDeleteNote, handleEditNote, handleToggleComplete, filter, darkMode }) => {
+  const filteredNotes = notes.filter((note) => {
     if (filter === "completed") {
-      return completedNotes.includes(index);
+      return note.completed;
     } else if (filter === "incomplete") {
-      return !completedNotes.includes(index);
+      return !note.completed;
     }
     return true;
   });
@@ -14,22 +14,17 @@ const NoteList = ({ notes, search, handleDeleteNote, handleEditNote, handleToggl
   return (
     <ul className="notes-list">
       {filteredNotes
-        .filter((note) => note.toLowerCase().includes(search.toLowerCase()))
-        .map((note, filteredIndex) => {
-          const originalIndex = notes.indexOf(note);
-          return (
-            <NoteItem
-              key={originalIndex}
-              note={note}
-              index={originalIndex}
-              handleDeleteNote={handleDeleteNote}
-              handleEditNote={handleEditNote}
-              handleToggleComplete={handleToggleComplete}
-              completedNotes={completedNotes}
-              darkMode={darkMode}
-            />
-          );
-        })}
+        .filter((note) => note.text.toLowerCase().includes(search.toLowerCase()))
+        .map((note) => (
+          <NoteItem
+            key={note.id}
+            note={note}
+            handleDeleteNote={handleDeleteNote}
+            handleEditNote={handleEditNote}
+            handleToggleComplete={handleToggleComplete}
+            darkMode={darkMode}
+          />
+        ))}
     </ul>
   );
 };
