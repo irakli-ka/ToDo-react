@@ -13,17 +13,16 @@ body {
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
-  padding-top: 20px; 
+  padding-top: 20px;
   overflow-y: auto;
 }
 
 .app {
   padding: 20px;
-  max-width: 600px;
+  max-width: 850px;
   margin: 0 auto;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 header {
   display: flex;
@@ -34,7 +33,7 @@ header {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: clamp(18px, 2vw, 24px);
   margin: 0;
 }
 
@@ -65,12 +64,12 @@ button:hover {
   align-items: center;
   border: none;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
 }
 
-@media (min-width: 830px) {
+@media (max-width: 768px) {
   .add-button {
-    right: calc((100% - 850px) / 2 + 20px);
+    bottom: 10px;
+    right: 10px;
   }
 }
 
@@ -79,8 +78,9 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  width: 800px;
-  margin-left: -40px;
+  max-width: 100%;
+  flex-wrap: wrap;
+  padding: 0 10px;
 }
 
 .search-bar {
@@ -88,11 +88,12 @@ button:hover {
   display: flex;
   align-items: center;
   position: relative;
+  max-width: 100%;
+  min-width: 600px;
 }
 
 .search-bar input {
   padding: 10px;
-  padding: 10px 40px 10px 10px;
   width: 100%;
   border: 1px solid #6c63ff;
   border-radius: 3px;
@@ -101,7 +102,7 @@ button:hover {
 
 .search-bar input.light-input {
   background-color: #ffffff;
-  color: #6a66d8
+  color: #6a66d8;
 }
 
 .search-bar input.dark-input {
@@ -110,6 +111,11 @@ button:hover {
   border-color: #ffffff;
 }
 
+@media (max-width: 768px) {
+  .search-bar {
+    min-width: 100%;
+  }
+}
 
 .search-bar .search-icon {
   position: absolute;
@@ -120,7 +126,7 @@ button:hover {
 }
 
 .filter-dropdown {
-  width: 120px;
+  width: auto;
   margin-left: 10px; 
   padding: 10px;
   border: none;
@@ -129,7 +135,7 @@ button:hover {
   color: #ffffff; 
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
-  font-family: 'kanit' serif;
+  font-family: 'kanit', serif;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -145,12 +151,13 @@ button:hover {
   background-color: #6a66d8; 
 }
 
+
 .theme-switch {
   border: none;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
   margin-left: 10px;
-  width: 35px;
-  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,31 +166,34 @@ button:hover {
 .notes-list {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 650px;
 }
 
 .note-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px;
   border-bottom: 1px solid #6c63ff;
-  width: 600px;
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
-
 
 .note-text {
   flex-grow: 1;
   padding-left: 10px;
   margin-right: 10px;
-  word-break: break-all;
-  overflow-wrap: break-word;
+  word-break: break-word;
   white-space: normal;
-  max-width: calc(100% - 50px);
   font-weight: bold;
-
 }
+
 .note-checkbox {
   appearance: none;
   width: 25px;
@@ -200,7 +210,6 @@ button:hover {
 
 .note-checkbox:checked {
   background-color: #6c63ff;
-  border-color: #6c63ff;
 }
 
 .note-checkbox:checked::after {
@@ -213,6 +222,11 @@ button:hover {
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.note-checkbox:checked + .note-text {
+  color: gray;
+  text-decoration: line-through;
 }
 
 .button-container {
@@ -231,7 +245,6 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
-
 
 .note-item button.edit-btn:hover img {
   filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(200deg) brightness(90%) contrast(90%);
@@ -304,7 +317,7 @@ button:hover {
 }
 
 .modal-content .modal-add-btn {
-  font-family: 'kanit' serif;
+  font-family: 'kanit', serif;
   font-weight: 600;
   position: absolute;
   right: 20px;
@@ -313,7 +326,7 @@ button:hover {
 }
 
 .modal-content .modal-cancel-btn {
-  font-family: 'kanit' serif;
+  font-family: 'kanit', serif;
   font-weight: 600;
   background-color: transparent;
   border: 1px solid #6c63ff;
@@ -335,7 +348,6 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
-
 
 .no-notes {
   text-align: center;
@@ -361,7 +373,6 @@ button:hover {
   color: #000000;
 }
 
-
 .undo-container {
   position: fixed;
   bottom: 20px;
@@ -377,19 +388,43 @@ button:hover {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 120px;
-  height: 40px;
+  width: 160px;
+  height: 50px;
+  padding: 10px 20px;
   font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
 }
 
-@media (min-width: 830px) {
+@media (max-width: 800px) {
   .undo-button {
-    left: calc((100% - 850px) / 2 + 20px);
+    bottom: 80px;
+    right: 10px;
+  }
+}
+
+@media (min-width: 800px) {
+  .add-button {
+    right: calc((100% - 800px) / 2 + 20px);
+  }
+
+  .undo-button {
+    left: calc((100% - 800px) / 2 + 20px);
+  }
+}
+
+@media (max-width: 800px) {
+  .filter-dropdown {
+    margin-top: 10px;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .theme-switch {
+    margin-top: 10px;
+    margin-left: 0;
   }
 }
